@@ -3,7 +3,7 @@ FROM debian:jessie
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
-RUN apt-get -y install git php5 php5-mysql pwgen php5-fpm php5-mcrypt php5-gd vim software-properties-common apt-utils
+RUN apt-get -y install git php5 php5-mysql pwgen php5-fpm php5-mcrypt php5-gd vim software-properties-common apt-utils wget
 
 # install nginx
 RUN echo "deb http://nginx.org/packages/debian/ jessie nginx" >> /etc/apt/sources.list.d/nginx.list
@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y mariadb-server
 ADD mysql_my.cnf /etc/mysql/conf.d/my.cnf
 
 # nginx configuration
+RUN rm -rf /etc/nginx/conf.d/
 ADD nginx_default.conf /etc/nginx/conf.d/default.conf
 
 # Remove pre-installed database
